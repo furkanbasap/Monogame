@@ -9,7 +9,6 @@ namespace Monogame.Animation
 {
     public class AnimationFrames
     {
-
         public Rectangle SourceRectangle { get; set; }
 
         public AnimationFrames(Rectangle rectangle)
