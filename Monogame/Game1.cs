@@ -10,10 +10,9 @@ namespace Monogame
         private GraphicsDeviceManager _graphics;            //Graphics renderen
         private SpriteBatch _spriteBatch;                   //2D Graphics, visueel
 
-        private Texture2D _texture;
-        Hero hero;
+        private Texture2D _heroTexture;
+        private Hero hero;
 
-        public object InitializeGameObject { get; private set; }
 
         public Game1()                                      //Constructor       /1
         {
@@ -28,6 +27,7 @@ namespace Monogame
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            hero = new Hero(_heroTexture);
         }
 
 
@@ -36,14 +36,14 @@ namespace Monogame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            _texture = Content.Load<Texture2D>("Spritesheet");
+            _heroTexture = Content.Load<Texture2D>("Spritesheet");
 
             InitializeGameObject();
         }
 
         private void InitializeGameObject()
         {
-            hero = new Hero(texture);
+            hero = new Hero(_heroTexture);
         }
 
         protected override void Update(GameTime gameTime)   //Hart van app      /Loop tussen Update en Draw
@@ -53,7 +53,8 @@ namespace Monogame
 
             // TODO: Add your update logic here
 
-            hero.Update();  
+            hero.Update(gameTime);  
+
 
             base.Update(gameTime);
         }

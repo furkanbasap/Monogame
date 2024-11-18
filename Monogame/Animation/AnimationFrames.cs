@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Monogame.Animation
 {
@@ -13,8 +13,9 @@ namespace Monogame.Animation
 
         public AnimationFrames(Rectangle rectangle)
         {
-            SourceRectangle = rectangle;
+            this.SourceRectangle = rectangle;
         }
 
+ 
     }
 }

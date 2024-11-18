@@ -4,39 +4,38 @@ using Monogame.Animation;
 using Monogame.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Color = Microsoft.Xna.Framework.Color;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
- 
+
 
 namespace Monogame
 {
-    public class Hero:IGameObject
+    public class Hero : IGameObject
     {
-        Texture2D heroTexture;
+        private Texture2D heroTexture;
         private Rectangle _deelRectangle;
-        private int schuifop_X = 0;
-        Animation animatie;
+        private int schuifOp_X = 0;
+        private Animations animatie;
 
 
         public Hero(Texture2D texture)
         {
-            heroTexture = texture;
-            _deelRectangle = new Rectangle(schuifop_X, 0, 180, 247);
-            animatie = new Animation();
-            animatie.AddFrame(new AnimationFrames(new Rectangle(0, 0, 280, 385)));
-            animatie.AddFrame(new AnimationFrames(new Rectangle(280, 0, 280, 385)));
-            animatie.AddFrame(new AnimationFrames(new Rectangle(560, 0, 280, 385)));
-            animatie.AddFrame(new AnimationFrames(new Rectangle(840, 0, 280, 385)));
-            animatie.AddFrame(new AnimationFrames(new Rectangle(1120, 0, 280, 385)));
+            this.heroTexture = texture;
+            animatie = new Animations();
+            animatie.GetFramesFromTextureProperties
+           (texture.Width, texture.Height, 5, 2);
 
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            animatie.Update();
+            animatie.Update(gameTime);
         }
 
 
