@@ -73,5 +73,12 @@ namespace Monogame
 
             base.Draw(gameTime);
         }
+
+        private IInputReader inputReader;
+        public void ChangeInput(IInputReader inputReader)
+        {
+            this.inputReader = inputReader;
+        }
+
     }
 }
