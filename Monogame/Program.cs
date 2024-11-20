@@ -1,6 +1,13 @@
-﻿static void Main()
+﻿using System;
+
+
+class Program
 {
-    using (var game = new Monogame.Game1())
-        game.Run();
+    static void Main()
+    {
+        using (var game = new Monogame.Game1())
+            game.Run();
+    }
 }
+
 
