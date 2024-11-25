@@ -16,13 +16,27 @@ using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Monogame
 {
-    public class Hero : IGameObject, IMoveable
+    public class Hero : IGameObject, IMovable
     {
         private Texture2D heroTexture;
         private Rectangle _deelRectangle;
         private int schuifOp_X = 0;
         private Animations animatie;
-        
+
+
+        private Vector2 position;
+        public Vector2 Position
+        { set { this.position = Position; } get { return this.position; } }
+
+
+        private Vector2 speed;
+        public Vector2 Speed
+        { set{this.speed = Speed;} get{return this.speed;} }
+
+        private IInputReader inputReader;
+        public IInputReader InputReader
+        { set { this.inputReader = InputReader; } get { return this.inputReader; } }
+
 
         public Hero(Texture2D texture)
         {
@@ -34,41 +48,34 @@ namespace Monogame
 
         }
 
-        private IInputReader inputReader;
         public Hero(Texture2D texture, IInputReader inputReader)
         {
             this.heroTexture = texture;
             this.inputReader = inputReader;
             animatie = new Animations();
-            positie = new Vector2(1, 1);
-            snelheid = new Vector2(2, 2);
+            position = new Vector2(1, 1);
+            speed = new Vector2(2, 2);
             versnelling = new Vector2(0.1f, 0.1f);
         }
 
 
         public void Update(GameTime gameTime)
         {
-            //Move();
-            ////MovewithMouse();
-            //animatie.Update(gameTime);
 
-            Microsoft.Xna.Framework.Vector2 direction = inputReader.ReadInput(); 
-            direction *= snelheid;
-            positie += direction;
-
+            Move();
+            //MovewithMouse();
             animatie.Update(gameTime);
 
 
         }
 
-        private Vector2 positie = new Vector2(0, 0);
-        private Vector2 snelheid = new Vector2(1, 1);
+
         private Vector2 versnelling = new Vector2(0.1f, 0.1f);
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture, positie, animatie.CurrentFrame.SourceRectangle, Color.White);
+            spriteBatch.Draw(heroTexture, Position, animatie.CurrentFrame.SourceRectangle, Color.White);
 
         }
 
@@ -82,6 +89,9 @@ namespace Monogame
             }
             return v;
         }
+
+        MovementManager movementManager = new MovementManager();
+
         private void Move()
         {
             //positie += snelheid;
@@ -103,12 +113,12 @@ namespace Monogame
             //    versnelling.Y *= -1;
             //}
 
+
+
             movementManager.Move(this);
 
 
         }
-
-        var direction = inputReader.ReadInput();
 
 
         private void MoveWithMouse()
@@ -116,16 +126,29 @@ namespace Monogame
             MouseState state = Mouse.GetState();
             Vector2 mouseVector = new Vector2(state.X, state.Y);
 
-            var richting = mouseVector - positie;
+            var richting = mouseVector - Position;
             richting.Normalize();
             richting = Vector2.Multiply(richting, 0.1f);
-            snelheid += richting;
-            snelheid = Limit(snelheid, 10);
-            positie += snelheid;
-
-
-
+            Speed += richting;
+            Speed = Limit(Speed, 10);
+            Position += Speed;
 
         }
+
+        public void ChangeInput(IInputReader inputReader)
+        {
+            this.inputReader = inputReader;
+        }
+
+
+        public Vector2 ReadInput()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool IsDestinationInput => throw new NotImplementedException();
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Monogame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Monogame
 {
-    class MouseReader : IInputReader
+    public class MouseReader : IInputReader
     {
         public Vector2 ReadInput()
         {

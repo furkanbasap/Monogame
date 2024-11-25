@@ -31,8 +31,10 @@ namespace Monogame.Animation
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
+
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
             int fps = 3;
+
             if (secondCounter >= 1d / fps)
             {
                 counter++;

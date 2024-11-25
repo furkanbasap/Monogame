@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Monogame.Interfaces
 {
-    interface IGameObject
+    public interface IGameObject
     {
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch);

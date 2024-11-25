@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Monogame.Interfaces;
 using System;
 
 namespace Monogame
@@ -12,6 +13,8 @@ namespace Monogame
 
         private Texture2D _heroTexture;
         private Hero hero;
+
+
 
 
         public Game1()                                      //Constructor       /1
@@ -27,7 +30,8 @@ namespace Monogame
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            hero = new Hero(_heroTexture);
+            //hero = new Hero(_heroTexture);
+            hero = new Hero(_heroTexture, new KeyboardReader());
         }
 
 
@@ -43,7 +47,7 @@ namespace Monogame
 
         private void InitializeGameObject()
         {
-            hero = new Hero(_heroTexture);
+            hero = new Hero(_heroTexture, new KeyboardReader());
         }
 
         protected override void Update(GameTime gameTime)   //Hart van app      /Loop tussen Update en Draw
@@ -74,11 +78,7 @@ namespace Monogame
             base.Draw(gameTime);
         }
 
-        private IInputReader inputReader;
-        public void ChangeInput(IInputReader inputReader)
-        {
-            this.inputReader = inputReader;
-        }
+
 
     }
 }

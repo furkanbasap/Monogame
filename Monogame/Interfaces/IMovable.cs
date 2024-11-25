@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monogame
+namespace Monogame.Interfaces
 {
-    internal class IMovable
+    public interface IMovable
     {
         public Vector2 Position { get; set; }
         public Vector2 Speed { get; set; }
@@ -15,4 +15,5 @@ namespace Monogame
         {
             get; set;
         }
+    }
 }
